@@ -1,0 +1,24 @@
+# פונקציית עקיבת קו עם בקרה
+def line_follow(target, speed, Kp):
+
+    light = color_sensor_in1.reflected_light_intensity
+    error = target - light
+    correction = Kp * error
+    speedL = speed + correction
+    speedR = speed - correction
+
+    if speedL > 100:
+        speedL = 100
+    elif speedL < -100:
+        speedL = -100
+
+    if speedR > 100:
+        speedR = 100
+    elif speedR < -100:
+        speedR = -100
+        
+    tank_drive.on(speedL, speedR)
+
+# לולאת התוכנית
+while True:
+    line_follow(50, 20, 1)
